@@ -1,0 +1,82 @@
+<!--
+TODO:
+1. implement delete feature.
+2. draggable note.
+-->
+<script type="text/javascript" src="{{MEDIA_URL}}javascript/jquery-1.6.2.min.js"></script>
+<div id="user_image" class="user_image">
+  <script type="text/javascript">
+    function addOption(){
+        $('#tern').imgAreaSelect({ enable:true, onSelectChange: showaddnote, x1: 120, y1: 90, x2: 280, y2: 210 });
+        return false;
+    }
+  function submitUserPoll(){
+    url = '{% url submit_poll user_image_id %}'//'/image_polling/submit_poll/{{user_image_id}}/';
+    if (Object.keys(notes).length == 0) {
+      alert('c\'mon select at least one option for people to vote for.');
+      return false;
+    }
+    if ($("#id_question").val() == 'Thou poll without a question?' || $("#id_question").val().trim() == ''){
+      alert('What question should thy ask to the summoned undead? Enter question?')
+      return false;
+    };
+    notes['question'] = $("#id_question").val();
+    $.ajax({
+      type: 'POST',
+      url: url,
+      data: notes,
+      success: function(data){
+        if (data=='success'){
+        document.location = '{% url show_poll user_image_id %}'//'/image_polling/{{user_image_id}}'
+        }
+      },
+    });
+  }
+</script>
+
+  </script>
+  </head>
+  <body>
+  <form style="text-align: center;" id="pollForm">
+    <input type="text" class="textbox" id="id_question" name="question" value='Thou poll without a question?' size='100' style="text-align: center;">
+  </form>
+  <br/>
+  <a href="#" id="addnotelink" onclick="javascript:addOption();">Add a note</a>
+  <div style="float:right; padding-right:50px; text-align:left; width:450px;">
+    <h4>Step Guide for Dummies</h4>
+    <ol>
+      <li>Good, now that you have very carefully chosen and uploaded a photo. It is time you start asking youself a question about it.<br/>
+      <li>Then Carefully chalk out the answers for the question you thought.<br/>
+      <li>You know it wouldnt be worth it, but do it for your country.<br/>
+      <li>Once you create all the options.<br/>
+      <li>Press the tiny button in the corner, Your own poll page will appear.<br/>
+      <li>Pat yourself on the back. You just saved the world.<br/>
+    </ol>
+    <br/>
+    <h4>Notes</h4><br/>
+    <ul>
+      <li>You can delete an option by double clicking on it</li>
+      <li>You can add a new option by double clicking on the image you uploaded</li>
+    </ul>
+  </div>
+  <p style="text-align: center;">
+  <img id="tern" ondblclick="javascript:addOption()" width="500px" src="/image_polling/user_images/{{user_image_id}}" alt="{{title}}" title="{{title}}">
+  <input type="button" value="submit" onclick="submitUserPoll()">
+  </p>
+  </div>
+  <script type="text/javascript">
+    var def_text = 'Thou poll without a question?'
+    $('#id_question').focus(function(){
+        foo = $("#id_question")
+        if (foo.val() == def_text){
+          foo.val('') 
+        }
+        });
+    $('#id_question').blur(function(){
+        foo = $("#id_question")
+        if (foo.val() == ''){
+          foo.val(def_text)
+        }
+        });
+  </script>
+</div>

@@ -1,0 +1,65 @@
+{%extends 'poll_base.html' %}
+{%block title%}{{ user_image.question }}{%endblock%}
+{%block preload_js %}
+  <script type="text/javascript" src="{{MEDIA_URL}}javascript/jquery_003.js"></script>
+  <script type="text/javascript" src="{{MEDIA_URL}}javascript/jquery-1.6.2.min.js"></script>
+  <script type="text/javascript" src="{{MEDIA_URL}}javascript/jquery-ui-1.8.16.custom.min.js"></script>
+  <script type="text/javascript" src="{{MEDIA_URL}}javascript/jquery.js"></script>
+  <script type="text/javascript" src="{{MEDIA_URL}}javascript/jquery_002.js"></script>
+  <script>
+    $(window).load(function () {
+      notes = {{user_options|safe}}
+      $('#user_image').imgNotes()
+      $('#user_image').imgAreaSelect({ hide: true, disable:true });
+    });
+    function voteDaalo(noteObj){
+      voting_url = '/image_polling/vote/{{user_image.id}}/'
+      $.ajax({
+        type: 'POST',
+        url: voting_url,
+        data: {'vote_option': noteObj.id},
+        success: function(data){
+          data = jQuery.parseJSON(data)
+          if (data['success']){
+            $("#info_div").addClass("success")
+            $("#info_div").html("Voted successfully")
+            $("#options").show()
+            $("#options").html("Poll results so far.")
+            $("#options").append("<ul>")
+            for (i in data['total_votes']){
+              $("#options").append("<li>"+i+": "+data['total_votes'][i]+"</li>")
+            }
+            $("#options").append("</ul>")
+          }
+          else if (data.error){
+            $("#info_div").removeClass();
+            $("#info_div").addClass("error")
+            $("#info_div").html(data.error)
+            $("#options").show()
+            $("#options").html("Poll results so far.")
+            $("#options").append("<ul>")
+            for (i in data['total_votes']){
+              $("#options").append("<li>"+i+": "+data['total_votes'][i]+"</li>")
+            }
+            $("#options").append("</ul>")
+          }
+          else{
+            $("#info_div").html("You were never meant to to see this.")
+          }
+        },
+      });
+    }
+  </script>
+{%endblock preload_js %}
+{%block info_div %}
+  <div align="center"><div id="info_div" class="validation" style="width:400px;">Please select an option to vote. Do it like you dont know anything</div></div>
+{%endblock info_div %}
+{%block body %}
+    <div>
+      <div class="question"><h2 color="black">{{user_image.question}}</h2></div>
+        <img id="user_image" width="500px" src="/image_polling/user_images/{{user_image.id}}" alt="{{user_image.question}}" title="{{user_image.question}}">
+        <div id="options" style="display; margin:20px">
+
+        </div>
+    </div>
+{%endblock body %}

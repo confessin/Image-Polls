@@ -1,0 +1,885 @@
+/* reset */
+* { padding: 0; margin: 0; }
+
+/* default layout */
+body { 
+	background: #EFEFEF;
+	font-size:75%;
+	color: #000;
+	font-family:"Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+a { color: #FF0E3F; }
+
+a img { border: 0; }
+
+h1, h2, h3, h4, legend, .font2, .button1, .button2 {
+	font-family:  'Gill Sans','Georgia','Palatino','Helvetica',serif;	
+}
+
+h1, h2, h3, h4, h5 {
+	line-height: 1.4em;
+	margin-top: 0;
+	margin-bottom: .25em;
+	font-weight: normal;
+}
+
+h1 { font-size: 2.5em; }
+
+h2 { font-size: 2.2em; }
+
+h3 { font-size: 1.9em; }
+
+h4 { font-size: 1.3em; }
+
+h5 { font-size: 1.1em; }
+
+ul { 
+	list-style-type: none;
+	margin: .5em 0;
+}
+
+ul li { 
+	padding-bottom: 1em; 
+	line-height: 1.5em; 
+}
+
+		ul .last { padding-bottom: .25em; line-height: 1.25em; }
+
+p, em{ 
+	padding: .25em 0 1em 0;
+  line-height: 1.5em;
+}
+
+legend { 
+	font-size: 1.7em;
+	color: #222;
+}
+
+fieldset {
+	padding:1.4em;
+	margin:0 0 1.5em 0;
+	border:1px solid #ccc;
+}
+
+table td { padding: .5em; }
+
+/* reusable classes */ 
+
+.swatch1 {
+	color: #FF0E3F;
+}
+
+.swatch1_links a {
+	color: #FF0E3F;
+}
+
+.swatch2 { 
+	color: #ff6600;
+}
+
+.swatch2_links a {
+	color: #ff6600;
+}
+
+.pad { padding: 10px; }
+
+.pad2 { padding: 20px; }
+
+.pad3 { padding: 30px; }
+
+.margin { margin: 10px; }
+
+.margin2 { margin: 20px; }
+
+.margin3 { margin: 30px; }
+
+.pad_horizontal { padding: 0 10px; }
+
+.pad_horizontal2 { padding: 0 20px; }
+
+.pad_horizontal3 { padding: 0 30px; }
+
+.pad_vertical { padding: 10px 0; }
+
+.pad_vertical2 { padding: 20px 0; }
+
+.pad_vertical3 { padding: 30px 0; }
+
+.floor { margin-bottom: 10px; }
+
+.floor2 { margin-bottom: 20px; }
+
+.floor3 { margin-bottom: 30px; }
+
+.floor4 { margin-bottom: 40px; }
+
+.floor5 { margin-bottom: 50px; }
+
+
+.ceiling { margin-top: 10px; }
+
+.ceiling2 { margin-top: 20px; }
+
+.ceiling3 { margin-top: 30px; }
+
+.ceiling4 { margin-top: 40px; }
+
+.ceiling5 { margin-top: 50px; }
+
+
+.border0 { border: 2px solid #fff; }
+
+.border1 {
+	border: 4px solid #FFE1E1;
+}
+
+.border2 { 
+	border: 4px solid #FFE8D9;
+}
+
+.border3 { border: 2px solid #ff9900;}
+
+.faint_border { border: 1px solid #ccc; }
+
+.bg1 { background: #FFE1E1; }
+
+.bg2 { background: #FFE8D9; }
+
+.faint_bg { background: #efefef; }
+
+.white_bg { background: #fff; }
+
+.white { color: #fff; }
+
+.dark_bg { background: #333; }
+
+.black_bg { background: #000; }
+
+.inline, .inline * { display: inline !important; }
+
+.vacuum { 
+	margin: 0;
+	padding: 0;
+	line-height: 1em;
+}
+
+.super_vacuum, .super_vacuum * {
+	margin: 0;
+	padding: 0;
+	line-height: 0em;
+}
+
+.arrow_right { 
+	background: url(http://s3.amazonaws.com/theoatmeal-img/default/arrow_right.png) no-repeat center right;
+	padding-right: 20px;
+}
+
+.arrow_left { 
+	background: url(http://s3.amazonaws.com/theoatmeal-img/default/arrow_left.png) no-repeat center left;
+	padding-left: 20px;
+}
+
+.squiggle_arrow_up {
+	background: url(http://s3.amazonaws.com/theoatmeal-img/default/squiggle_arrow_up.png) no-repeat center left;
+	padding-left: 20px;
+}
+
+.center_text { text-align: center; }
+
+.right_text { text-align: right; }
+
+.left_text { text-align: left; }
+
+.col1 {
+	float: left;
+	width: 50%;
+}
+
+.col2 { 
+	float: left;
+	width: 50%;
+}
+
+.col3 { 
+	float: left;
+	width: 50%;
+}
+
+
+.clear { clear: both !important; }
+
+.cursor { cursor: pointer; }
+
+.underline { text-decoration: underline; }
+
+.ghost { display: none; }
+
+.mute {
+	font-size: 12px;
+	text-transform: uppercase;
+}
+
+.big_arrow li, .big_arrow_alone {
+	background: url(http://s3.amazonaws.com/theoatmeal-img/default/big_arrow.png) no-repeat;
+	padding-left: 20px;
+}
+
+.squiggle_arrow li, .squiggle_arrow_alone {
+	background: url(http://s3.amazonaws.com/theoatmeal-img/default/squiggle_arrow.png) no-repeat 0 8px;
+	padding-left: 20px;
+}
+
+.squiggle_arrow_on_faint li {
+	background: url(http://s3.amazonaws.com/theoatmeal-img/default/squiggle_arrow_on_faint.png) no-repeat 0 8px;
+	padding-left: 20px;
+}
+
+.biggify { 
+	font-size: 1.2em;
+}
+
+.biggify2 { 
+	font-size: 1.5em;
+}
+
+.smallify {
+	font-size: 1.5em;
+}
+
+.gimungus {
+	font-size: 4em;
+}
+
+.button1, .button2 {
+	padding: .35em 1.2em;
+	color: #fff;
+	text-decoration: none;
+	font-size: 1.5em;
+	text-transform: uppercase;
+}
+
+.button1 { background: #FF0E3F; }
+
+.button2 { background: #ff6600; }
+
+.alert {
+	background: #efefef url(http://s3.amazonaws.com/theoatmeal-img/default/alert.png) no-repeat 5px 10px;
+	padding-left: 45px;
+}
+
+.shadow {
+  float:left;
+  background: url(http://s3.amazonaws.com/theoatmeal-img/default/shadow_alpha.png) no-repeat bottom right !important;
+  background: url(http://s3.amazonaws.com/theoatmeal-img/default/shadow.gif) no-repeat bottom right;
+  margin: 10px 0 0 10px !important;
+  margin: 10px 0 0 5px;
+}
+
+	.shadow img {
+	  display: block;
+	  position: relative;
+	  background-color: #fff;
+	  border: 1px solid #a9a9a9;
+	  margin: -6px 6px 6px -6px;
+	  padding: 4px;
+	}
+	
+.giant_letter {
+	font-family: 'Times New Roman','Georgia',serif;
+	font-size: 45px;
+}
+
+.italic { 
+	font-weight: italic;
+}
+
+.boxed {
+  border: 1px solid #ccc; 
+  padding: 1em;
+  margin-top: 35px;
+  z-index: -99999; 
+}
+
+    .boxed .boxtop  {
+      margin-top: -1.2em;
+      background: #fff; 
+      z-index: 1000000;
+      float: left;
+      padding: 0 .5em;
+      line-height: 1.2em;
+      margin-bottom: .5em;
+    }
+    
+    .boxed > * { clear: left; }
+		.boxed .next { clear: left;}
+
+.img_permalink {
+	background: url(http://s3.amazonaws.com/theoatmeal-img/default/permalink_icon.png) no-repeat center left;
+	padding-left: 18px;
+}
+
+.pagination {
+		background: url(http://s3.amazonaws.com/theoatmeal-img/default/moar_paginate.png) no-repeat 55px 18px #fff;
+		text-align: right;
+}
+
+#comics .pagination { 
+	background-position:  110px 18px; 
+	padding-right: 55px; 
+}
+
+/* header */
+
+#header, #footer {  width: 985px; }
+
+#header, #meat, #footer {
+	margin: 0 auto;
+}
+
+#header {
+	background: #fff url(http://s3.amazonaws.com/theoatmeal-img/default/header2.png) no-repeat;
+	height: 95px;
+	position: relative;
+}
+
+#header h1 span { display: none; }
+
+#header h1 a { 
+	width: 350px; 
+	height: 80px; 
+	position: absolute; 
+	top: 0; left: 0;
+}
+
+#header ul { 
+	margin-left: 370px; 
+}
+
+		#header li { 
+			width: 98px; 
+			float: left; 
+		}
+
+		#header li a { text-decoration: none; }
+
+		#nav_comics, #nav_quizzes,#nav_blog, #nav_stories, #nav_shop, #nav_about, #nav_misc, #nav_book { 
+			margin-top: 42px;
+		}
+
+		#nav_quizzes { margin-left: 6px; }
+
+		#nav_blog { margin-left: 13px; width: 43px !important; }
+		
+/*		#nav_misc { width: 64px !important; margin-left: 38px; } */
+		
+		#nav_book { 
+			width: 64px !important; 
+			margin-left: 35px;
+		}
+		v
+		#nav_book #new_button {
+			margin-left: 5px;
+		}
+		
+		#nav_shop { width: 50px !important; margin-left: 11px; }
+	
+		
+		#header .active {
+			color: #333;
+			background: url(http://s3.amazonaws.com/theoatmeal-img/default/arrow_down.png) no-repeat center bottom; 
+			padding-bottom: 10px;
+		}
+
+#follow { 
+	width: 163px !important; 
+	margin-left: 30px; 
+	margin-top: 5px;
+}
+
+		#follow h4 { 
+			width: 65px;
+			float: left;
+			margin-right: 2px; 
+			margin-top: 42px;
+		}
+
+		#follow div { 
+			float: left; 
+			width: 95px; 
+			margin-top: 5px;
+		}
+
+		#follow div h4 { margin-top: 0px !important; }
+		
+		#follow_rss_email  {
+			width: 90px !important;
+		}
+
+#tag_nav {
+	background: url(/img/default/tag_nav_bg.png) no-repeat 0 0;
+	font-size: 15px;
+	padding: 8px 0 3px 0;
+	text-align: center;
+	width: 689px;
+	height: 35px;
+	margin: 0 auto;
+}
+
+		#tag_nav_random {
+			background: url(/img/default/random_icon.png) no-repeat 0 0;
+			padding-left: 18px;
+			margin-left: 5px; 
+		}
+
+		#tag_nav_popular {
+			background: url(/img/default/pink_star.png) no-repeat 0 0;
+			padding-left: 13px;
+		}
+
+		#tag_nav a {
+			padding-right: 1em;
+		}
+		
+		#comics #tag_nav {
+			margin: 0;
+			font-size: 18px;
+			background: #efefef;
+			width: 800px;
+			height: 25px;
+			padding: 5px;
+		}
+
+#meat {
+	background: #fff;
+	padding: 2px 10px 10px 10px;
+	width: 965px;
+}
+
+#meat_with_sidebar {
+	width: 725px;
+	float: left;
+}
+
+#sidebar {
+	width: 210px;
+	float: left;
+	margin-left: 20px;
+}
+
+#footer {
+	background: url(http://s3.amazonaws.com/theoatmeal-img/default/footer2.png) no-repeat;
+	margin: 0 auto;
+	height: 181px;
+	width: 930px;
+	position: relative;
+}
+
+		#footer_follow { 
+			width: 474px;
+			margin-left: 260px;
+			font-size: 1.4em;
+			padding-top: 11px;
+		}
+
+		#footer_follow a {
+			padding: 0 .5em;
+		}
+
+		#bear_link {
+			position: absolute; 
+			bottom: 0; left: 380px;
+			display: block;
+			width: 180px; height: 110px;
+			z-index: 100000;
+		}
+		
+		#footer_nav {
+			text-align: center;
+			margin-top: 70px;
+		}
+		
+		#footer_nav h4 { 
+			font-size: 1.4em;
+		}
+		
+		#footer_nav h4 a { padding: 0 .5em; }
+		
+		#footer_nav span {
+			padding-right: 250px;
+		}
+		
+
+#friends { 
+	font-size: 11px;
+	text-transform: uppercase;
+	padding-top: 10px;
+}
+
+#friends a { padding-right: 1em; }
+
+/*  old footer
+#footer { 
+	background: url(http://s3.amazonaws.com/theoatmeal-img/default/footer.png) no-repeat;
+	padding-top: 5px;
+	margin-top: 10px;
+}
+
+#footer .col1 { 
+	margin-left: 300px !important;
+	width: 100px;
+}
+
+#footer .col2 { width: 200px;}
+
+#footer .col3 { width: 250px; }
+
+#footer .col3 a { padding-right: 1.5em; }
+
+#footer li { padding-bottom: .5em; }
+*/
+
+/* forms */
+
+.input label {
+	display: block;
+	text-transform: uppercase;
+}
+
+.input { margin-bottom: 10px; }
+
+
+/* home */
+
+#home { padding: 0 30px; }
+
+#follow_big {
+	background: url(http://s3.amazonaws.com/theoatmeal-img/thumbnails/follow_big.png) no-repeat 0 0;
+	width: 441px;
+	height: 259px;
+	margin-top: 10px;
+}
+
+	#follow_big ul { margin-right: 270px;}
+
+#latest {
+	width: 600px;
+	float: left;
+	padding-top: 0;
+}
+
+#latest h1 { 
+	font-size: 45px;
+	line-height: 1em;
+}
+
+#fb_like_and_popular {
+	width: 260px;
+	float: left;
+}
+
+#popular {
+	border: 3px solid #ccc;
+}
+
+	#popular img { border: 1px solid #efefef; }
+	
+	#popular .boxtop {
+		margin-left: 40px;
+	}
+	
+
+#feed_items li { 
+	width: 260px;
+	float: left;
+	margin-right: 30px;
+}
+
+		.bg_comic, .bg_quiz, .bg_story, .bg_misc, .bg_blog { 
+			padding: 20px 10px 0 20px; 
+			height: 300px;
+		}
+		
+		#feed_items .last_col { margin-right: 0; }
+
+		.bg_comic { background: url(http://s3.amazonaws.com/theoatmeal-img/home/box1.png) no-repeat top left; }
+
+		.bg_quiz { background: url(http://s3.amazonaws.com/theoatmeal-img/home/box2.png) no-repeat top left; }
+
+		.bg_story, .bg_misc, .bg_blog { background: url(http://s3.amazonaws.com/theoatmeal-img/home/box3.png) no-repeat top left; }
+
+		#feed_items .category_and_view { 
+			padding: 0 10px;
+		}
+
+		#feed_items .category_and_view h5 { margin-top: 5px; float: left; }
+
+		#feed_items .category_and_view h3 { float: right; }
+
+				#feed_items h3 a { text-decoration: none; }
+		
+		#feed_items .ad_unit {
+			padding: 0; 
+			margin: 20px 55px 0 0;
+		}
+				
+/* comics */
+#comics { padding-left: 35px; padding-right: 25px;}
+
+#book_sell {
+	background: url(http://s3.amazonaws.com/theoatmeal-img/default/crooked_box.png) no-repeat;
+}
+
+#book_sell .col1 {
+	width: 260px;
+}
+
+#book_sell .col1 h1 { margin-bottom: 0;  }
+
+#book_sell .col2 { 
+	width: 550px;
+}
+
+/* comic */
+
+
+#book_sell_sidebar {
+	width: 197px;
+}
+
+#book_sell_sidebar h2, #book_sell_sidebar h1  { 
+	margin-bottom: 0; 
+	line-height: 1.2em; 
+}
+
+#book_sell_sidebar h1 { margin-top: 0; }
+
+#more_sidebar {
+	width: 217px;
+	padding: 3px 0 0 0;
+}
+
+.boxtop1 {
+	background: url(http://s3.amazonaws.com/theoatmeal-img/default/sidebar_boxtop.png) no-repeat center bottom;
+	width: 217px;
+}
+
+.boxbottom1 {
+	background: url(http://s3.amazonaws.com/theoatmeal-img/default/sidebar_boxbottom.png) no-repeat center top;
+	width: 217px;
+}
+
+#view_count {
+	
+}
+
+/* share this */ 
+
+#share_this { 
+	height: 51px;
+	padding-top: 30px;
+}
+
+	#share_this a { 
+		text-decoration: none; 
+		padding-bottom: 10px;
+	} 
+
+	#share_this h2 { padding-right: 1.2em; }
+
+	.facebook_icon { 
+		background: url(http://s3.amazonaws.com/theoatmeal-img/default/facebook_icon.png) no-repeat; 
+		padding-left: 50px; 
+	}
+	
+	.myspace_icon { 
+		background: url(http://s3.amazonaws.com/theoatmeal-img/default/myspace_icon.png) no-repeat; 
+		padding-left: 50px; 
+	}
+	
+	.twitter_icon { 
+		background: url(http://s3.amazonaws.com/theoatmeal-img/default/twitter_icon.png) no-repeat; 
+		padding-left: 50px; 
+	}
+
+/* content footer */
+#content_footer {
+	width: 700px;
+	margin: 0 auto;
+}	
+
+#content_footer table { margin: 0 auto;  width: 500px; }
+
+
+/* new content footer */
+
+#content_footer2 {
+	width: 600px;
+	margin: 0px auto 0px auto;
+}
+#content_footer2 #cf2_facebook {
+	background: url(http://s3.amazonaws.com/theoatmeal-img/content_footer/nav2/fb.png) no-repeat 0px 5px; 
+	width: 237px;
+	height: 66px;
+	padding-top: 0px;
+}
+
+#content_footer2 #cf2_like {
+	width: 50px;
+	
+}
+
+#cf_nav a {
+	display: block;
+	padding-bottom: 5px;
+}
+
+/* more from the oatmeal */
+#more_top {
+	background: url(http://s3.amazonaws.com/theoatmeal-img/default/more_boxtop.png) no-repeat center top;
+}
+
+
+#more_bottom {
+	background: url(http://s3.amazonaws.com/theoatmeal-img/default/more_boxbottom.png) no-repeat center top;
+}
+
+
+/* shop */
+
+#shop h1 { font-size: 60px; }
+
+/* buy book */
+
+#buy_book {
+	background: url(cbook_photos.jpg) no-repeat 0 0;
+	padding-left: 350px;
+}
+
+#buy_book #get_first { font-size: 2.9em; }
+
+#samples img { padding-right: 10px; }
+
+#buy_book .squiggle_arrow { margin-top: 10px; margin-bottom: 0; }
+
+#buy_book .button1 { 
+	font-size: 2em;
+	border-bottom: 2px solid #920000;
+	border-right: 2px solid #920000;
+}
+
+/* buy book 2 */
+
+#buy_book2 h1 {
+	font-size: 40px;
+}
+#buy_book2 #buy_header {
+	background: url(http://s3.amazonaws.com/theoatmeal-img/buy_book2/photo1.jpg) no-repeat right top;
+	padding-right: 340px;
+}
+
+
+/* quizzes */
+#quiz .question_number { font-size: 2em; }
+
+#quiz_html, #quiz_facebook, #quiz_myspace, #quiz_twitter { padding-bottom: 5px; padding-left: 45px; }
+
+#quiz_html { background: url(http://s3.amazonaws.com/theoatmeal-img/quizzes/blog_icon.png) no-repeat 0 0; }
+
+#quiz_facebook { background: url(http://s3.amazonaws.com/theoatmeal-img/quizzes/facebook_icon.png) no-repeat 0 0; }
+
+#quiz_myspace { background: url(http://s3.amazonaws.com/theoatmeal-img/quizzes/myspace_icon.png) no-repeat 0 0; }
+
+#quiz_twitter { background: url(http://s3.amazonaws.com/theoatmeal-img/quizzes/twitter_icon.png) no-repeat 0 0; }
+
+#fb_result .col1 {
+	width: 600px;
+}
+
+#fb_result .col2 { width: 300px; }
+
+
+
+/* about */
+#about {
+	background: url(http://s3.amazonaws.com/theoatmeal-img/about/portrait.png) no-repeat 10px 25px;
+	padding-left: 350px;
+}
+
+#about h1 { font-size: 3.5em; margin-top: 0; line-height: 1em; }
+
+
+/* email subscribe */
+#subscribers {
+	background: url(http://s3.amazonaws.com/theoatmeal-img/subscribers/email_letter.png) no-repeat;
+	padding-left: 180px;
+}
+
+#subscribers .input { 
+	display: inline; 
+	margin-left: 5px;
+}
+
+#subscribers .button2 { 
+	margin-top: 10px;
+	display: block;
+}
+
+.error-message {
+	color: #920000;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+/* flash */
+#flash {
+	border: 4px solid #333;
+	padding: 15px;
+	text-align: center;
+	width: 650px;
+	margin: 10px auto;
+}
+
+
+/* temp fix */
+#sidebar .border1 { display: none; }
+
+
+/* framed content */
+#frame_header {
+	background: #333;
+	color: #fff;
+}
+
+/* countdown to book in footer */
+#footer_countdown { 
+	background: url(/img/book/footer_promo_with_timer.jpg) no-repeat 0 0;
+	width: 648px;
+	height: 148px;
+	position: relative;
+	margin: 0 auto;
+	display: block;
+	text-decoration: none;
+ }
+
+#footer_countdown #countdown {
+	color: #000;
+	text-transform: uppercase;
+	font-size: 17px;
+	color: #ff3300;
+	display: block;
+	position: absolute;
+	top: 68px;
+	left: 125px;
+}
+
+
+/* minor differences nav */
+
+.md_nav img { margin-right: 15px; }
+
+
+/* bobcats nav */
+
+.bobcats_nav img { margin-right: 15px; }
+

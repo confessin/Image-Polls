@@ -1,0 +1,62 @@
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    dir="{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}"
+    xml:lang="{% firstof LANGUAGE_CODE 'en' %}"
+    lang="{% firstof LANGUAGE_CODE 'en' %}">
+  <head>
+    <title>{% block title %}{% endblock %} - Image Polling</title>
+
+    <link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}css/ui-lightness/jquery-ui-1.8.16.custom.css">
+    <link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}css/imgnotes.css">
+    <!-- all in one seo pack 1.4.6.13 [301,360] -->
+    <meta name="description" content="Create a free image poll with picpoll.in. Share the poll and let the world know." />
+    <meta name="keywords" content="create photo poll,image poll,make photo poll,multimedia poll,photo poll,pic poll,picture poll,polls,post photo poll" />
+    <!-- /all in one seo pack -->
+
+    {% block css %}
+    {% endblock %}
+    <script type="text/javascript">var switchTo5x=false;</script><script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script><script type="text/javascript">stLight.options({publisher:'1b48fe02-6943-4679-8ba7-1b494f5866e2'});</script>
+    {% block preload_js %}
+    {% endblock %}
+
+    {% block extra-head %}{% endblock %}
+  </head>
+
+  <body>
+    <div id="header">
+      <div style="float:left; position:absolute;">
+        <a id="home" href="{%url home %}">Home</a>
+        <a id="about" href="{%url about %}">About</a>
+      </div>
+      <div style="float:right;color:red; margin:0px 10px;">
+        <a href="{%url vote_campaign %}" style="color:red;">feeling not to vote?</a>
+      </div>
+      <!-- info div here -->
+      <div >{% block info_div %}{%endblock%}</div>
+      <!--Need a nice toolbar-->
+    </div>
+    <!--ShareButtons-->
+    <div style="float:left;">
+      <span  class='st_reddit_large' ></span><br /><span  class='st_google_large' ></span><br /><span  class='st_delicious_large' ></span><br /><span  class='st_twitter_large' ></span><br /><span  class='st_facebook_large' ></span><br /><span  class='st_email_large' ></span><br />
+    </div>
+    {%block body %}{%endblock%}
+  </body>
+<!--Google analytics code-->
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-28557708-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</html>
+
+

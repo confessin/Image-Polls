@@ -1,0 +1,98 @@
+# Create your views here.
+import time
+import os
+
+from django.http import HttpResponse,HttpResponseRedirect
+from django.conf import settings
+from django.shortcuts import render_to_response,redirect
+from django.template.context import RequestContext
+from django.views.decorators.csrf import csrf_exempt
+from django.core.urlresolvers import reverse, redirect
+from filetransfers.api import prepare_upload
+from google.appengine.api import images
+from google.appengine.ext import db
+from google.appengine.ext import webapp
+
+from main import models
+from main import forms
+
+
+# CONSTANTS
+UPLOADED_IMAGES_LOC = os.path.join(settings.MEDIA_ROOT, 'user_images')
+
+
+def handle_uploaded_file(request):
+    form = forms.UploadForm(request.POST, request.FILES)#{'image':f, 'question':'doo'})
+    a = form.save()
+    return a
+    #file_name = '%s.jpeg'%time.time()
+    #destination = open(os.path.join(UPLOADED_IMAGES_LOC, file_name), 'wb+')
+    #for chunk in f.chunks():
+    #    destination.write(chunk)
+    #destination.close()
+    #return file_name
+
+
+def get_image_from_datastore(idx):
+    photo = models.UserImage.objects.get(id=idx)
+    return photo.image
+    return images.get_serving_url(str(photo.image.file.blobstore_info))
+    if photo:
+        img = images.Image(photo.image.file.blobstore_info)
+        img.resize(width=500)
+        img.im_feeling_lucky()
+        thumbnail = img.execute_transforms(output_encoding=images.JPEG)
+        return thumbnail
+
+
+def index(request):
+    """first page. will show a nice UI and an imagefield."""
+    # preparing the app engine specific crap.
+    view_url = reverse('main.views.show_image')
+    upload_url, upload_data = prepare_upload(request, view_url)
+    form = forms.UploadForm()
+    return render_to_response('index.html',
+            {'form': form, 'upload_url': upload_url, 'upload_data': upload_data},
+            context_instance=RequestContext(request))
+
+
+@csrf_exempt
+def show_image(request):
+    """Second page, Will accept a post request and return a jsonresponse with
+    the image data and and all the js."""
+    formobj = handle_uploaded_file(request)#request.FILES.get('imageFile')
+    #FIXME: this needs to be changed if not using app engine
+    context = {'user_image_id': formobj.id, 'title': ''}
+    return render_to_response('show_image.html', context,
+            context_instance=RequestContext(request))
+
+
+def serve_user_image(request, image_id):
+    """ """
+    image = get_image_from_datastore(image_id)
+    if image:
+        response = HttpResponse(image)
+        response['Content-Type'] = 'image/jpeg'
+        return response
+
+
+def submit_poll(request, image_id):
+    """View for retrieving and storing image poll data in a db.
+    will return a page showing the poll and an ability to let them share."""
+    option_data = {}
+    data = request.POST
+    keys = [i[0].strip() for i.split('[') in request.POST]
+
+    for key in keys:
+        option_data[key] =[data[key+'[note]'],
+                ','.join(data[key+'['+i+']'] for i in
+                    ['x1','y1','width','height'])]
+    #save the options
+    for option in option_data.values():
+        models.Options.create(poll_id=image_id, option_name=option[0]
+                coordinates=option[1]).save()
+    return redirect('show_poll', poll_id=image_id)
+
+
+def show_poll(request, poll_id):
+    return HttpResponse('done')

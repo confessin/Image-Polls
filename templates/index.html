@@ -1,0 +1,149 @@
+{%extends 'poll_base.html' %}
+{%block title%}Home{%endblock%}
+{%block preload_js %}
+  <script type="text/javascript" src="{{MEDIA_URL}}javascript/jquery_003.js"></script>
+  <script type="text/javascript" src="{{MEDIA_URL}}javascript/jquery-1.6.2.min.js"></script>
+  <script type="text/javascript" src="{{MEDIA_URL}}javascript/jquery-ui-1.8.16.custom.min.js"></script>
+  <script type="text/javascript" src="{{MEDIA_URL}}javascript/jquery.js"></script>
+  <script type="text/javascript" src="{{MEDIA_URL}}javascript/jquery_002.js"></script>
+
+  <script type="text/javascript">
+
+     //{'1':{"x1":"10","y1":"10","height":"150","width":"50","note":"This is a note"},
+      //'2':{"x1":"25","y1":"25","height":"70","width":"80","note":"<b>This</b> is a new note This is another note This is a new note"}};
+
+    $(window).load(function () {
+      notes = {};
+      //$('#tern').imgNotes(); //If your notes data is is not named notes pass it
+
+      // jQuery UI Dialog
+      $('#dialog').dialog({
+          autoOpen: false,
+          width: 400,
+          modal: true,
+          resizable: false,
+          buttons: {
+              "Yeah": function() {
+                  var target = $($(this).data('target'));
+                  // FIXME: we might have to send notes data
+                  // to store options in backend..fix the implementation.
+                  delete notes[target[0].id]
+                  target.remove()
+                  $(this).dialog("close");
+              },
+              "Nope": function() {
+                  $(this).dialog("close");
+              }
+          }
+      });
+
+      //$('#tern').imgAreaSelect({ onSelectChange: showaddnote })
+
+      $('#cancelnote').click(function(){
+        $('#tern').imgAreaSelect({ hide: true, disable:true });
+        $('#noteform').hide();
+      });
+
+      $('#addnotelink').click(function(){
+        $('#tern').imgAreaSelect({ enable:true, onSelectChange: showaddnote, x1: 120, y1: 90, x2: 280, y2: 210 });
+        return false;
+      });
+
+      $('#tern').dblclick(function(){
+        $('#tern').imgAreaSelect({ enable:true, onSelectChange: showaddnote, x1: 120, y1: 90, x2: 280, y2: 210 });
+        return false;
+      });
+
+      // Adding the note
+      $('#NoteAddForm').submit(function(){
+        formObj = $('#NoteAddForm')[0]
+        var note_length = Object.keys(notes).length;
+        notes[note_length+1] = {"x1":formObj.NoteX1.value,"y1":formObj.NoteY1.value,"height":formObj.NoteHeight.value,"width":formObj.NoteWidth.value,"note":formObj.NoteNote.value};
+        //clear all the present tags
+        $('.note').remove();
+        $('.notep').remove()
+        $('#tern').imgNotes(notes, 'edit')
+        $('#tern').imgAreaSelect({ hide: true, disable:true });
+        $('#noteform').hide()
+        return false;
+      });
+        /*$('div.note').dblclick(function(e){
+        var target = e.target
+        $("p#dialog-email").html($("input#emailJQ").val());
+        $('#dialog').data("target", target).dialog('open');
+      });*/
+      /*$('#imageForm').submit(function(){
+          $.post('upload_image',$("#imageForm").serialize(),
+            function(data) {
+            //$("#user-img").html(data)
+            $('.result').html(data);
+            });
+          return false;
+          });
+          */
+      $('#imageForm').ajaxForm(function(data) {
+          $('.result').html(data);
+          return false;
+      });
+  });
+  // event handler for the note
+  function showDeleteNote(noteObj){
+    $("p#dialog-email").html($("input#emailJQ").val());
+    $('#dialog').data("target", noteObj).dialog('open');
+  };
+
+  function showaddnote (img, area) {
+    imgOffset = $(img).offset();
+    form_left  = parseInt(imgOffset.left) + parseInt(area.x1);
+    form_top   = parseInt(imgOffset.top) + parseInt(area.y1) + parseInt(area.height)+5;
+
+    $('#noteform').css({ left: form_left + 'px', top: form_top + 'px'});
+
+    $('#noteform').show();
+
+    $('#noteform').css("z-index", 10000);
+    $('#NoteX1').val(area.x1);
+    $('#NoteY1').val(area.y1);
+    $('#NoteHeight').val(area.height);
+    $('#NoteWidth').val(area.width);
+  }
+  </script>
+{%endblock preload_js %}
+{%block body%}
+<div style="padding-bottom:30px; border-bottom: 1px solid #DEDEDE;" >
+    <div>
+      <form id="imageForm" method="post" action="{{ upload_url }}" enctype="multipart/form-data">
+        {%csrf_token%}
+        <div class="input_image"><h2>Upload an image to create your own poll</h2></div>
+        <br/>
+        <div>{{ form }}</div>
+        </br>
+        <div>  <button>Upload</button>
+        </div>
+      </form>
+    </div>
+    </div>
+    <div style="left: 547px; top: 223px; display: none; z-index: 10000;" id="noteform">
+      <form id="NoteAddForm" method="post" action="">
+        <fieldset>
+        <legend>Add Note</legend>
+        <input name="data[Note][x1]" value="120" id="NoteX1" type="hidden">
+        <input name="data[Note][y1]" value="90" id="NoteY1" type="hidden">
+        <input name="data[Note][height]" value="120" id="NoteHeight" type="hidden">
+        <input name="data[Note][width]" value="160" id="NoteWidth" type="hidden">
+        <textarea name="data[Note][note]" id="NoteNote"></textarea>
+        </fieldset>
+        <div class="submit"><input value="Submit" type="submit"> &nbsp;&nbsp;&nbsp;<input value="Cancel" id="cancelnote" type="button"></div>
+      </form>
+    </div>
+    <div id "result" class="result"></div>
+
+    <div id="dialog" title="Option Deleter says">
+    <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 0 0;"></span>Shalt Thou remove?</p>
+    </div>
+    <noscript>
+        <p>Please enable JavaScript to use this app.</p>
+        <!-- or put a simple form for upload here -->
+    </noscript>
+</div>
+{%endblock body%}

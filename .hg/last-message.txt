@@ -1,0 +1,1 @@
+=Added google html file and a few other templates. Added poll_base.html. Also a few more fixes.
