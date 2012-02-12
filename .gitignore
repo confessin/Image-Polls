@@ -40,3 +40,7 @@ django/*
 djangoappengine/*
 djangotoolbox/*
 filetransfers/*
+
+# extras
+*.swp
+*.swo

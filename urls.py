@@ -15,8 +15,8 @@ urlpatterns = patterns('',
     url(r'^googlebfe22224fa5be37c.html$', 'django.views.generic.simple.direct_to_template',
         {'template':'googlebfe22224fa5be37c.html'}),
     # robots.txt
-    url(r'^googlebfe22224fa5be37c.html$', 'django.views.generic.simple.direct_to_template',
-        {'template':'googlebfe22224fa5be37c.html'}, name='about'),
+    url(r'^robots.txt$', 'django.views.generic.simple.direct_to_template',
+        {'template':'robots.txt'}, name='robots.txt'),
     (r'^$', include('main.urls')),
 )
 
